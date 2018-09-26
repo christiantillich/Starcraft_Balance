@@ -16,6 +16,7 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -37,3 +38,5 @@ rsconnect/
 
 # Anything in the "data" folder
 /data/*
+.Rproj.user
+
