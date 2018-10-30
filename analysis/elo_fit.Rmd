@@ -1,0 +1,92 @@
+---
+title: "elo_fit"
+author: "Christian Tillich"
+date: "October 22, 2018"
+output: md_document
+---
+
+```{r setup, include=FALSE}
+library(reshape2)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
+```
+
+# Elo Convergence
+
+```{r elo_dist, out.height = 250, out.width = 250}
+df12 <- read.csv('../data/with_elo_k12.csv')
+df20 <- read.csv('../data/with_elo_k20.csv')
+df32 <- read.csv('../data/with_elo_k32.csv')
+
+qplot(df12$elo_P1); qplot(df12$elo_P2)
+qplot(df20$elo_P1); qplot(df20$elo_P2)
+qplot(df32$elo_P1); qplot(df32$elo_P2)
+```
+
+
+# Objective
+
+To assess the fit of our three elo models qualitatively. By assessing the individual narratives of some of the more high-profile players in SC2 in this time period, we can get the following:
+
+1) Whether those stories match known observations at the time. 
+2) Whether a larger/smaller k makes for a better model. 
+3) What's an acceptable burn-in rate to exclude games where elo may not be representative of the player's skill. 
+
+
+
+```{r elo_story}
+elo_story <- function(player, df = df12){
+  df %>% 
+    filter(P1 == player | P2 == player) %>% 
+    select(id, P1,P2,elo_P1,elo_P2) %>% 
+    mutate(player_score = ifelse(P1 == player, elo_P1, elo_P2)) %>%
+    select(id, winner = P1, loser = P2, elo = player_score)
+}
+
+```
+
+
+## IdrA's Story
+
+```{r idra_story}
+elo_story('600_IdrA') %>% qplot(x = id, y = elo, data = .)
+elo_story('600_IdrA', df20) %>% qplot(x = id, y = elo, data = .)
+elo_story('600_IdrA', df32) %>% qplot(x = id, y = elo, data = .)
+```
+
+Note, Idra's story really captures the "long slump well I think" [](https://liquipedia.net/starcraft2/IdrA)
+
+
+## HerO's Story
+
+```{r hero_story}
+elo_story('222_HerO') %>% qplot(x = id, y = elo, data = .)
+elo_story('222_HerO', df20) %>% qplot(x = id, y = elo, data = .)
+elo_story('222_HerO', df32) %>% qplot(x = id, y = elo, data = .)
+```
+HerO starts in 2011. 
+
+
+## Mvp's Story
+
+```{r mvp_story}
+elo_story('590_Mvp') %>% qplot(x = id, y = elo, data = .)
+elo_story('590_Mvp', df20) %>% qplot(x = id, y = elo, data = .)
+elo_story('590_Mvp', df32) %>% qplot(x = id, y = elo, data = .)
+```
+
+## Life's
+
+```{r mvp_story}
+elo_story('2747_Life') %>% qplot(x = id, y = elo, data = .)
+elo_story('2747_Life', df20) %>% qplot(x = id, y = elo, data = .)
+elo_story('2747_Life', df32) %>% qplot(x = id, y = elo, data = .)
+```
+
+Something is incorrect here. Life has an elo well above 1500 but he doesn't come out when running code to identify the best players. Look into this. 
+
+```{r}
+df12 %>% 
+  group_by(P1) %>% 
+  summarise(high_score = mean(elo_P1)) %>% arrange(desc(high_score)) %>% 
+  head
+```

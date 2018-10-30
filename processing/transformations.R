@@ -1,7 +1,7 @@
 get_raw_data <- function(path = "C://Users/Christian Tillich/Documents/GitHub/Starcraft_Balance/data/raw.txt"){
   read.csv(path, header = FALSE, stringsAsFactors = FALSE) %>% 
     `colnames<-`(c("Date","Leage","Map","P1","Race_P1","P2","Race_P2")) %>%
-    mutate(id = as.integer(rownames(.)))
+    mutate(id = nrow(.) - as.integer(rownames(.)))
 }
 
 
@@ -27,13 +27,12 @@ score_single_game <- function(k, P1, P2, id){
   #P1 here is always the winner, this is consistent with the data formatting. 
   prior <- get_elo()[c(P1,P2)] %>% 
     {data.frame(player = names(.), elo = ., stringsAsFactors = FALSE)} %>%
-    mutate(r = 10^(elo/400), exp = r / sum(r))
+    mutate(q = 10^(elo/400), exp = q / sum(q))
   
   update <- prior %>%
     mutate(
         winner = as.integer(player == P1)
-      , r_prime = r + k*(winner - exp)
-      , elo_prime = 400*log10(r_prime)
+      , elo_prime = elo + k*(winner - exp)
     )
   
   update %>% filter(player == P1) %>% {update_elo(.$player, .$elo_prime)}
@@ -49,9 +48,8 @@ score_single_game <- function(k, P1, P2, id){
 score_all_games <- function(df, k = 32){
   elo_init()
   
-  df %>% 
-    arrange(desc(id)) %>% 
-    {mapply(score_single_game, 32, .$P1, .$P2, .$id, SIMPLIFY = FALSE)} %>% 
+  df %>% arrange(id) %>% 
+    {mapply(score_single_game, k, .$P1, .$P2, .$id, SIMPLIFY = FALSE)} %>% 
     bind_rows() %>% 
     {merge(df, ., by = "id")} 
 }

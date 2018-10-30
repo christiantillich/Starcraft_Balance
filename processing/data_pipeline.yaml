@@ -1,0 +1,35 @@
+configs:
+  reader: read.csv
+  writer: write.better
+  local_dir: "C:/Users/Christian Tillich/Documents/GitHub/Starcraft_Balance/processing"
+  s3_dir: "C:/Users/Christian Tillich/Documents/GitHub/Starcraft_Balance/data"
+  transform_files: transformations.R
+  check_files: checks.R
+steps:
+  - 
+    description: "Clean Metadata"
+    transform: get_raw_data
+    type: '0f1'
+    out: as_real_csv.csv
+  - 
+    description: "Create Elo Score from Raw - k=32"
+    transform: score_all_games
+    type: '1f1'
+    in: as_real_csv.csv
+    out: with_elo_k32.csv
+  - 
+    description: "Create Elo Score from Raw - k=20"
+    transform: {name: score_all_games, k: 20}
+    type: '1f1'
+    in: as_real_csv.csv
+    out: with_elo_k20.csv
+  - 
+    description: "Create Elo Score from Raw - k=12"
+    transform: {name: score_all_games, k: 12}
+    type: '1f1'
+    in: as_real_csv.csv
+    out: with_elo_k12.csv
+checks:
+  - function: get_dims #something's wrong with one of these
+  - function: get_types
+  
