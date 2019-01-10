@@ -188,7 +188,7 @@ elo_story('590_Mvp', df32) %>% qplot(x = id, y = elo, data = .)
 
 ## Life's
 
-```{r mvp_story}
+```{r life_story}
 elo_story('2747_Life') %>% qplot(x = id, y = elo, data = .)
 elo_story('2747_Life', df20) %>% qplot(x = id, y = elo, data = .)
 elo_story('2747_Life', df32) %>% qplot(x = id, y = elo, data = .)
@@ -196,7 +196,7 @@ elo_story('2747_Life', df32) %>% qplot(x = id, y = elo, data = .)
 
 ## hG's Story
 
-```{r mvp_story}
+```{r hg_story}
 elo_story('1736_hG') %>% qplot(x = id, y = elo, data = .)
 ```
 
