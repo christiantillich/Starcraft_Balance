@@ -1,7 +1,8 @@
 get_raw_data <- function(path = "C://Users/Christian Tillich/Documents/GitHub/Starcraft_Balance/data/raw.txt"){
   read.csv(path, header = FALSE, stringsAsFactors = FALSE) %>% 
-    `colnames<-`(c("Date","Leage","Map","P1","Race_P1","P2","Race_P2")) %>%
-    mutate(id = nrow(.) - as.integer(rownames(.)))
+    `colnames<-`(c("Date","League","Map","P1","Race_P1","P2","Race_P2")) %>%
+    arrange(Date) %>% 
+    mutate(id = 1:nrow(.))
 }
 
 
