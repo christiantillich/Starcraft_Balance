@@ -146,6 +146,14 @@ elo_story('1996_Stephano') %>% qplot(x = id, y = elo, data = .) %>%
   add_time_mark(76359, "MLG Summer 2012")
 ```
 
+Stephano doesn't have a reliable tournament presence prior to 2011. This is possibly because he started playing Starcraft under the handle Sat. Unfortunately, this set doesn't include games from that handle. 
+
+Stephano's presence in the tournament scene seems to be marked by a slow, steady climb to top-tier play. By July 2011, Stephano had placed 1st in the Master Series, and by Oct 2011 he would go on and win the ESWC against MarineKing and MaNa. 
+
+In November 2011, Stephano has a disappointing run in the Battle of Berlin, Dreamhack, and the Blizzard Cup. The model captures this run nicely, and Stephano quickly rebounds shortly after. 
+
+By March 2012, Stephano has reached his prime. 
+
 
 Stephano could be an interesting contrast to IdrA. But the key objection to contrasting him to IdrA is that you're comparing a largely French player to an American one. Those talent pools may be different, and thus their elos not comparable. In order to use Stephano as a contrast we need to demonstrate that his elo gives good expectations regarding his tournament wins/losses. 
 
