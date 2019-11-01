@@ -150,9 +150,9 @@ Stephano doesn't have a reliable tournament presence prior to 2011. This is poss
 
 Stephano's presence in the tournament scene seems to be marked by a slow, steady climb to top-tier play. By July 2011, Stephano had placed 1st in the Master Series, and by Oct 2011 he would go on and win the ESWC against MarineKing and MaNa. 
 
-In November 2011, Stephano has a disappointing run in the Battle of Berlin, Dreamhack, and the Blizzard Cup. The model captures this run nicely, and Stephano quickly rebounds shortly after. 
+In November 2011, Stephano has a disappointing run in the Battle of Berlin, Dreamhack, and the Blizzard Cup. The model captures this run nicely, and along with the rebound Stephano quickly rebounds shortly after. By March 2012, Stephano had reached his peak performance, just as entered the Lone Star Clash. In winning this tournament, Stephano a) successfully defeated his rival Polt and b) entered the top 10 players based on Prize Money received. This is a helpful heuristic, as both by elo and prize money received, Stephano is in the top 10. In fact, the [two lists](https://www.millenium.org/news/69435.html) share 5/10 of the same players. And 8/10 top prize money winners exist in the top 20 ranked, while the other two seem to be absent from the data set entirely (NesTea and FruitDealer). 
 
-By March 2012, Stephano has reached his prime. 
+
 
 
 Stephano could be an interesting contrast to IdrA. But the key objection to contrasting him to IdrA is that you're comparing a largely French player to an American one. Those talent pools may be different, and thus their elos not comparable. In order to use Stephano as a contrast we need to demonstrate that his elo gives good expectations regarding his tournament wins/losses. 
